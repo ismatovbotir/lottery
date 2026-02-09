@@ -15,9 +15,7 @@ use App\Http\Controllers\api\LotteryController;
 |
 */
 
-Route::group([
-    'prefix'=>'lottery',
-],function(){
-    Route::resource('/lottery',LotteryController::class);
 
-});
+Route::resource('/lottery',LotteryController::class);
+
+
