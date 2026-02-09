@@ -46,7 +46,7 @@ class ReceiptController extends Controller
             'items'            => 'required|array|min:1',
             'items.*.code'     => 'required|string',
             'items.*.name'     => 'required|string',
-            //'items.*.price'    => 'required|numeric|min:0',
+            'items.*.qty'    => 'required|numeric|min:0',
             'items.*.total'      => 'required|numeric|min:0.001',
 
             'payments'             => 'required|array|min:1',
