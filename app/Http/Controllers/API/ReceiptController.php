@@ -10,9 +10,8 @@ use Illuminate\Http\Request;
 
 class ReceiptController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
+    public $prefix=1000;
     public function index()
     {
         //
