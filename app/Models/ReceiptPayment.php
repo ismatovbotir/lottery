@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class ReceiptPayment extends Model
 {
     use HasFactory;
+    public $guarded=[];
 }
