@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\api\LotteryController;
+use App\Http\Controllers\api\ReceiptController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +15,9 @@ use App\Http\Controllers\api\LotteryController;
 |
 */
 
+Route::group([
+    'prefix'=>'lottery',
+],function(){
+    Route::resource('/receipt',ReceiptController::class);
 
-Route::resource('/lottery',LotteryController::class);
-
-
+});
