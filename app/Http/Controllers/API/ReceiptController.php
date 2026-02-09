@@ -12,9 +12,12 @@ class ReceiptController extends Controller
 {
     
     public $prefix=1000;
+
     public function index()
     {
-        //
+        return response()->json([
+            'success' => true,
+            'receipt' => "Hello World"], 200); 
     }
 
     /**
@@ -43,7 +46,7 @@ class ReceiptController extends Controller
             'items'            => 'required|array|min:1',
             'items.*.code'     => 'required|string',
             'items.*.name'     => 'required|string',
-            'items.*.price'    => 'required|numeric|min:0',
+            //'items.*.price'    => 'required|numeric|min:0',
             'items.*.total'      => 'required|numeric|min:0.001',
 
             'payments'             => 'required|array|min:1',
@@ -88,7 +91,7 @@ class ReceiptController extends Controller
 
         return response()->json([
             'success' => true,
-            'receipt' => $receipt->load(['items', 'payments']),
+            'receipt' => $receipt //->load(['items', 'payments']),
         ], 201);
     }
 
