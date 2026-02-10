@@ -43,15 +43,15 @@ class ReceiptController extends Controller
             'receipt_barcode' => 'nullable|string',
             'total'           => 'nullable|numeric|min:0',
 
-            'items'            => 'required|array|min:1',
-            'items.*.code'     => 'required|string',
-            'items.*.name'     => 'required|string',
-            'items.*.qty'    => 'required|numeric|min:0',
-            'items.*.total'      => 'required|numeric|min:0.001',
+            // 'items'            => 'required|array|min:1',
+            // 'items.*.code'     => 'required|string',
+            // 'items.*.name'     => 'required|string',
+            // 'items.*.qty'    => 'required|numeric|min:0',
+            // 'items.*.total'      => 'required|numeric|min:0.001',
 
-            'payments'             => 'required|array|min:1',
-            'payments.*.type'      => 'required|string',
-            'payments.*.value'     => 'required|numeric|min:0.01',
+            // 'payments'             => 'required|array|min:1',
+            // 'payments.*.type'      => 'required|string',
+            // 'payments.*.value'     => 'required|numeric|min:0.01',
 
         ]);
         $receipt = Receipt::create([
@@ -70,25 +70,30 @@ class ReceiptController extends Controller
             'no'=>$receipt->id+$this->prefix
         ]);
          // 📦 items
-         foreach ($data['items'] as $item) {
-            ReceiptItem::create([
-                'receipt_id' => $receipt->id,
-                'code'       => $item['code'],
-                'name'       => $item['name'],
-                'qty'        => $item['qty'],
-                'total'      => $item['total'],
-            ]);
-        }
-
+        if (!empty($data['items'])) {
+            // items exists and not empty        }
+            foreach ($data['items'] as $item) {
+                ReceiptItem::create([
+                    'receipt_id' => $receipt->id,
+                    'code'       => $item['code'],
+                    'name'       => $item['name'],
+                    'qty'        => $item['qty'],
+                    'total'      => $item['total'],
+                ]);
+            }
+        }    
         // 💳 payments
-        foreach ($data['payments'] as $payment) {
-            ReceiptPayment::create([
-                'receipt_id' => $receipt->id,
-                'type'       => $payment['type'],
-                'value'      => $payment['value'],
-            ]);
-        }
-
+        if (!empty($data['payments'])) {
+            // items exists and not empty
+        
+            foreach ($data['payments'] as $payment) {
+                ReceiptPayment::create([
+                    'receipt_id' => $receipt->id,
+                    'type'       => $payment['type'],
+                    'value'      => $payment['value'],
+                ]);
+            }
+        }    
         return response()->json([
             'success' => true,
             'receipt' => $receipt->load(['items', 'payments']),

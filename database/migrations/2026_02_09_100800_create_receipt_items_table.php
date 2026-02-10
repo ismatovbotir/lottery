@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('receipt_id')->constrained();
             $table->string('code');
             $table->string('name');
+            $table->integer('storno')->default(0);
             $table->decimal('qty',10,3);
             $table->decimal('total',15,2);
             
