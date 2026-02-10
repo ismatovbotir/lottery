@@ -96,7 +96,7 @@ class ReceiptController extends Controller
         }    
         return response()->json([
             'success' => true,
-            'receipt' => $receipt->load(['items', 'payments']),
+            'data' => $receipt->load(['items', 'payments']),
         ], 201);
     }
 

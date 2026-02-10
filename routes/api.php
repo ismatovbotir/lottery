@@ -17,6 +17,7 @@ use App\Http\Controllers\api\ReceiptController;
 
 Route::group([
     'prefix'=>'lottery',
+    'middleware'=>'api.token'
 ],function(){
     Route::resource('/receipt',ReceiptController::class);
 
