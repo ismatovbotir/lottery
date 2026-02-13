@@ -33,6 +33,12 @@ class ReceiptController extends Controller
      */
     public function store(Request $request)
     {
+        $token = $request->header('X-Token');
+        $type="pharmacy";
+        if($token=="8f6d9b2a4c7e1a9d3f0e5c8b7a4d6e9f2c1b0a8e7d6f5c4b3a2e1d9c8f7a6b"){
+            $type="retail";
+        };
+          
         $data = $request->validate([
             'type'            => 'nullable|string',
             'shop'            => 'nullable|string',
@@ -56,7 +62,7 @@ class ReceiptController extends Controller
         ]);
         $receipt = Receipt::create([
             //'no'              => ($lastNo ?? 0) + 1,
-            'type'            => $data['type'] ?? 'retail',
+            'type'            => $type,
             'shop'            => $data['shop'] ?? null,
             'pos'             => $data['pos'] ?? null,
             'cashier'         => $data['cashier'] ?? null,
