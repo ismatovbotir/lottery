@@ -31,7 +31,7 @@ class ApiTokenMiddleware
             return response()->json([
                 'success' => false,
                 'data' => 'Invalid API token'
-            ], 403);
+            ], 402);
         }
 
         return $next($request);

@@ -21,7 +21,7 @@ window.onload = () => {
             info: {
                 title: "Lottery API",
                 version: "1.0.0",
-                description: "Receipt creation resolved by X-TOKEN."
+                description: "Receipt creation resolved by X-Token."
             },
             paths: {
                 "/api/lottery/receipt": {
@@ -105,11 +105,12 @@ window.onload = () => {
                                 }
                             },
                             "401": {
-                                description: "Invalid or missing X-TOKEN"
+                                description: "Missing X-Token"
                             },
-                            "422": {
-                                description: "Validation error"
-                            }
+                            "402": {
+                                description: "Invalid X-Token"
+                            },
+                            
                         }
                     }
                 }
