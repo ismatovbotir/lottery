@@ -12,7 +12,7 @@ class ReceiptController extends Controller
 {
     
     public $prefix=1000;
-
+    public $limit=100000;
     public function index()
     {
         return response()->json([
@@ -60,6 +60,13 @@ class ReceiptController extends Controller
             // 'payments.*.value'     => 'required|numeric|min:0.01',
 
         ]);
+        if($data['total']<$this->limit){
+            return response()->json([
+                'success' => false,
+                'data' => "Reciept total should be more then ".$this->limit,
+            ], 500);
+        };
+
         $receipt = Receipt::create([
             //'no'              => ($lastNo ?? 0) + 1,
             'type'            => $type,
@@ -99,11 +106,13 @@ class ReceiptController extends Controller
                     'value'      => $payment['value'],
                 ]);
             }
-        }    
+        } 
         return response()->json([
             'success' => true,
             'data' => $receipt->load(['items', 'payments']),
-        ], 201);
+        ], 201);   
+       
+
     }
 
     /**
