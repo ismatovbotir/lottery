@@ -61,10 +61,19 @@ class ReceiptController extends Controller
 
         ]);
         if($data['total']<$this->limit){
-            return response()->json([
+            if( $type=="pharmacy"){
+                return response()->json([
+                    'success' => true,
+                    'data' => ["no"=>""]
+                ], 201);      
+
+            }else{
+               return response()->json([
                 'success' => false,
                 'data' => "Reciept total should be more then ".$this->limit,
-            ], 500);
+            ], 500);  
+            }
+           
         };
 
         $receipt = Receipt::create([
