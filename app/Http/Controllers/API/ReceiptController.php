@@ -88,9 +88,14 @@ class ReceiptController extends Controller
             'total'           => $data['total'] ?? 0,
         ]);
         $no=0;
-         if($data['total']>=$this->limit){
-            $no=$receipt->id+$this->prefix;
+        $totalLimit=$this->limit;
+        if( $type=="pharmacy"){
+            $totalLimit=$totalLimit*100;
            
+        }
+        if($data['total']>=$totalLimit){
+            $no=$receipt->id+$this->prefix;
+        
         };
         $receipt->update([
             'no'=>$no
