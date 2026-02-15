@@ -87,7 +87,7 @@ class ReceiptController extends Controller
             'receipt_barcode' => $data['receipt_barcode'] ?? null,
             'total'           => $data['total'] ?? 0,
         ]);
-        $no="";
+        $no=0;
          if($data['total']>=$this->limit){
             $no=$receipt->id+$this->prefix;
            
