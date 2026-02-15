@@ -60,21 +60,21 @@ class ReceiptController extends Controller
             // 'payments.*.value'     => 'required|numeric|min:0.01',
 
         ]);
-        if($data['total']<$this->limit){
-            if( $type=="pharmacy"){
-                return response()->json([
-                    'success' => true,
-                    'data' => ["no"=>""]
-                ], 201);      
+        // if($data['total']<$this->limit){
+        //     if( $type=="pharmacy"){
+        //         return response()->json([
+        //             'success' => true,
+        //             'data' => ["no"=>""]
+        //         ], 201);      
 
-            }else{
-               return response()->json([
-                'success' => false,
-                'data' => "Reciept total should be more then ".$this->limit,
-            ], 500);  
-            }
+        //     }else{
+        //        return response()->json([
+        //         'success' => false,
+        //         'data' => "Reciept total should be more then ".$this->limit,
+        //     ], 500);  
+        //     }
            
-        };
+        // };
 
         $receipt = Receipt::create([
             //'no'              => ($lastNo ?? 0) + 1,
@@ -87,10 +87,14 @@ class ReceiptController extends Controller
             'receipt_barcode' => $data['receipt_barcode'] ?? null,
             'total'           => $data['total'] ?? 0,
         ]);
-
+        $no="";
+         if($data['total']>=$this->limit){
+            $no=$receipt->id+$this->prefix;
+           
+        };
         $receipt->update([
-            'no'=>$receipt->id+$this->prefix
-        ]);
+            'no'=>$no
+            ]);
          // 📦 items
         if (!empty($data['items'])) {
             // items exists and not empty        }
